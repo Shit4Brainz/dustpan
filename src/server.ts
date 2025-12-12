@@ -36,7 +36,7 @@ app.post("/", (req: Request, res: Response) => {
     
     let name = req.body.messages[0]?.content.match(/<(.+?)'s Persona>/)[1];
     name = escapeStringPath(name);
-    const probablyFirstMessage = escapeString(req.body.messages[2].content)
+    const probablyFirstMessage = escapeString(req.body.messages[2].content).replaceAll("{user}", "{{user}}")
     const outputFilePath = `cards/${name}-${uuidv4()}.json`;
     // TODO - Make the create_date accurate. Honestly the entire way this json file is written could be better, I just want to start downloading characters
     const outputString = `
